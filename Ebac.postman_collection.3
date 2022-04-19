@@ -1,0 +1,557 @@
+{
+	"info": {
+		"_postman_id": "539352f6-cdcf-47d9-9a51-81df094a84c2",
+		"name": "Ebac",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cadastro de Produtos",
+			"item": [
+				{
+					"name": "Validação de cadastro de produto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"cadastro de produto existente\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Já existe produto com esse nome\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlYm9yYXBlbmltcGVkb0Bob3RtYWlsLmNvbS5iciIsInBhc3N3b3JkIjoidGVzdGUiLCJpYXQiOjE2NTAzNzcwMzMsImV4cCI6MTY1MDM3NzYzM30.fP21oJsc17CynONaoVKJmOJ7g3F2hw8CqrEAnYISYFo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Livro\",\r\n  \"preco\": 1000,\r\n  \"descricao\": \"papelaria\",\r\n  \"quantidade\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/produtos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validação novo produtos cadastrados",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"novo produto cadastrado \", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Bola\");\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"quantidade\": 2,\r\n  \"usuarios\": [\r\n    {\r\n      \"nome\": \"Logitech MX Vertical\",\r\n      \"preco\": 470,\r\n      \"descricao\": \"Mouse\",\r\n      \"quantidade\": 381,\r\n      \"_id\": \"BeeJh5lz3k6kSIzA\"\r\n    },\r\n    {\r\n      \"nome\": \"Samsung 60 polegadas\",\r\n      \"preco\": 5240,\r\n      \"descricao\": \"TV\",\r\n      \"quantidade\": 49977,\r\n      \"_id\": \"K6leHdftCeOJj8BJ\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/produtos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validação produtos  não cadastrados",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Produto não cadastrado\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"folha\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"quantidade\": 2,\r\n  \"usuarios\": [\r\n    {\r\n      \"nome\": \"Logitech MX Vertical\",\r\n      \"preco\": 470,\r\n      \"descricao\": \"Mouse\",\r\n      \"quantidade\": 381,\r\n      \"_id\": \"BeeJh5lz3k6kSIzA\"\r\n    },\r\n    {\r\n      \"nome\": \"Samsung 60 polegadas\",\r\n      \"preco\": 5240,\r\n      \"descricao\": \"TV\",\r\n      \"quantidade\": 49977,\r\n      \"_id\": \"K6leHdftCeOJj8BJ\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/produtos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lista de produtos",
+			"item": [
+				{
+					"name": "Lista de produtos cadastrados",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"validar produto especifico da lista\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Vestido Azul\");\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"validar produto que não da lista\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Giz\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"quantidade\": 2,\r\n  \"usuarios\": [\r\n    {\r\n      \"nome\": \"Logitech MX Vertical\",\r\n      \"preco\": 470,\r\n      \"descricao\": \"Mouse\",\r\n      \"quantidade\": 381,\r\n      \"_id\": \"BeeJh5lz3k6kSIzA\"\r\n    },\r\n    {\r\n      \"nome\": \"Samsung 60 polegadas\",\r\n      \"preco\": 5240,\r\n      \"descricao\": \"TV\",\r\n      \"quantidade\": 49977,\r\n      \"_id\": \"K6leHdftCeOJj8BJ\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/produtos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cadastro de usuário",
+			"item": [
+				{
+					"name": "Validar usuário ja cadastrado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"cadastro de usuário existente\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Este email já está sendo usado\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Debora Penimpedo\",\r\n  \"email\": \"deborapenimpedo@hotmail.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar cadastro de usuário cadastrado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar cadastro de usuario cadastrado\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Debora Penimpedo\");\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Debora Penimpedo\",\r\n  \"email\": \"deborapenimpedo@hotmail.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\",\r\n  \"_id\": \"HoiI4jfTrOevBQxS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/usuarios/HoiI4jfTrOevBQxS",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuarios",
+								"HoiI4jfTrOevBQxS"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar usuário não cadastrado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar usuario não cadastrado\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Sabrina Penimpedo\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Todos usuários cadastrados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Alteração de produtos",
+			"item": [
+				{
+					"name": "Validar  mensagem de alteração de produto existente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"produto existente\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Já existe produto com esse nome\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlYm9yYXBlbmltcGVkb0Bob3RtYWlsLmNvbS5iciIsInBhc3N3b3JkIjoidGVzdGUiLCJpYXQiOjE2NTAzODA1MDgsImV4cCI6MTY1MDM4MTEwOH0.1LSmeih5XZX9ShtZeEVaN6J4be7OCpMOeKecbVu_kLw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Logitech MX Vertical\",\r\n  \"preco\": 470,\r\n  \"descricao\": \"Mouse\",\r\n  \"quantidade\": 381\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/produtos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alteração de produto com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"mensagem de alteração com sucesso\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Registro alterado com sucesso\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlYm9yYXBlbmltcGVkb0Bob3RtYWlsLmNvbS5iciIsInBhc3N3b3JkIjoidGVzdGUiLCJpYXQiOjE2NTAzNzk3MzMsImV4cCI6MTY1MDM4MDMzM30.GV_b4IPoTKZ5NYEmOBmocwxsTS-7edctsNinKj60n-k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Mala3\",\r\n  \"preco\": 10202,\r\n  \"descricao\": \"acessorios\",\r\n  \"quantidade\": 6000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/produtos/bkc3duHIwYgAnokY",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produtos",
+								"bkc3duHIwYgAnokY"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Exclusão de produtos",
+			"item": [
+				{
+					"name": "Validação de mensagem de exclusão - carrinho",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"mensagem de carrinho\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Não é permitido excluir produto que faz parte de carrinho\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlYm9yYXBlbmltcGVkb0Bob3RtYWlsLmNvbS5iciIsInBhc3N3b3JkIjoidGVzdGUiLCJpYXQiOjE2NTAzODk3MjksImV4cCI6MTY1MDM5MDMyOX0.dWE9q2YJZr1qKEFStOVfugSgyz6_lP4mjPtaxG2qAkg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/produtos/K6leHdftCeOJj8BJ",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"produtos",
+								"K6leHdftCeOJj8BJ"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cadastro de Login",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlYm9yYXBlbmltcGVkb0Bob3RtYWlsLmNvbS5iciIsInBhc3N3b3JkIjoidGVzdGUiLCJpYXQiOjE2NDk3NzAwNDUsImV4cCI6MTY0OTc3MDY0NX0.0Hry2SkqH1UF793BZhHPBah_tepWAbpUplCjHmIjbEc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"deborapenimpedo@hotmail.com.br\",\r\n  \"password\": \"teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
